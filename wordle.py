@@ -3,8 +3,7 @@ import random
 from colorama import Fore
 from english_words import *
 
-#TODO: Edge case for only guess.count(letter) == secret_word(letter) should be yellow/green
-secret_word_list = ['monkey', 'browed', 'strait', 'cobble', 'dabber', 'amazed', 'export', 'ripper', 'aebeae', 'easier', 'astral']
+secret_word_list = ['monkey', 'browed', 'strait', 'cobble', 'dabber', 'amazed', 'export', 'ripper', 'easier', 'astral',]
 
 
 def guessgame():
@@ -23,12 +22,23 @@ def guessgame():
                 print(Fore.GREEN + guess)
                 return
             k = 0
+            count_l = 0
+            count_s = 0
             for j in guess:
                 if j == secret_word[k]:
                     print(Fore.GREEN + j + Fore.RESET)
                     tracker.insert(0, j)
                 elif j in secret_word and j not in tracker:
-                    print(Fore.YELLOW + j + Fore.RESET)
+                    for l in guess:
+                        if l == j:
+                            count_l += 1
+                    for s in secret_word:
+                        if s == j:
+                            count_s += 1
+                    if count_s == count_l:
+                        print(Fore.YELLOW + j + Fore.RESET)
+                    else:
+                        print(Fore.RED + j + Fore.RESET)
                     tracker.insert(0, j)
                 else:
                     print(Fore.RED + j + Fore.RESET)

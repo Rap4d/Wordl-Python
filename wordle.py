@@ -11,7 +11,6 @@ def guessgame():
     i = 5
     while i > 0:
         tracker = []
-        k = 0
         guess = input("Enter guess: ")
         if len(guess) != len(secret_word):
             print(f"Word is {len(secret_word)} chars long")
@@ -21,26 +20,26 @@ def guessgame():
             if guess == secret_word:
                 print(Fore.GREEN + guess)
                 return
-            k = 0
+            letter_k = 0
             count_i = 0
             count_s = 0
-            for j in guess:
-                if j == secret_word[k]:
-                    print(Fore.GREEN + j + Fore.RESET)
-                elif j in secret_word:
-                    count_i = guess.count(j)
-                    count_s = secret_word.count(j)
+            for letter_j in guess:
+                if letter_j == secret_word[letter_k]:
+                    print(Fore.GREEN + letter_j + Fore.RESET)
+                elif letter_j in secret_word:
+                    count_i = guess.count(letter_j)
+                    count_s = secret_word.count(letter_j)
                     if count_s == count_i:
-                        print(Fore.YELLOW + j + Fore.RESET)
-                    elif count_s != count_i and j not in tracker:
-                        print(Fore.LIGHTYELLOW_EX + j + Fore.RESET)
-                        tracker.insert(0, j)
-                    elif count_s != count_i and j in tracker:
-                        print(Fore.RED + j + Fore.RESET)
-                        tracker.insert(0, j)
+                        print(Fore.YELLOW + letter_j + Fore.RESET)
+                    elif count_s != count_i and letter_j not in tracker:
+                        print(Fore.LIGHTYELLOW_EX + letter_j + Fore.RESET)
+                        tracker.insert(0, letter_j)
+                    elif count_s != count_i and letter_j in tracker:
+                        print(Fore.RED + letter_j + Fore.RESET)
+                        tracker.insert(0, letter_j)
                 else:
-                    print(Fore.RED + j + Fore.RESET)
-                k += 1
+                    print(Fore.RED + letter_j + Fore.RESET)
+                letter_k += 1
             print(tracker)
             i -= 1
     print(f"Out of tries! Word was {secret_word}")

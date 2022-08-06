@@ -3,7 +3,7 @@ import random
 from colorama import Fore
 from english_words import *
 
-secret_word_list = ['monkey', 'browed', 'strait', 'cobble', 'dabber', 'amazed', 'export', 'ripper', 'easier', 'astral',]
+secret_word_list = ['monkey', 'browed', 'strait', 'cobble', 'dabber', 'amazed', 'export', 'ripper', 'easier', 'astral']
 
 
 def guessgame():
@@ -22,24 +22,22 @@ def guessgame():
                 print(Fore.GREEN + guess)
                 return
             k = 0
-            count_l = 0
+            count_i = 0
             count_s = 0
             for j in guess:
                 if j == secret_word[k]:
                     print(Fore.GREEN + j + Fore.RESET)
-                    tracker.insert(0, j)
-                elif j in secret_word and j not in tracker:
-                    for l in guess:
-                        if l == j:
-                            count_l += 1
-                    for s in secret_word:
-                        if s == j:
-                            count_s += 1
-                    if count_s == count_l:
+                elif j in secret_word:
+                    count_i = guess.count(j)
+                    count_s = secret_word.count(j)
+                    if count_s == count_i:
                         print(Fore.YELLOW + j + Fore.RESET)
-                    else:
+                    elif count_s != count_i and j not in tracker:
+                        print(Fore.LIGHTYELLOW_EX + j + Fore.RESET)
+                        tracker.insert(0, j)
+                    elif count_s != count_i and j in tracker:
                         print(Fore.RED + j + Fore.RESET)
-                    tracker.insert(0, j)
+                        tracker.insert(0, j)
                 else:
                     print(Fore.RED + j + Fore.RESET)
                 k += 1

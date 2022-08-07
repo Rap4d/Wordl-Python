@@ -4,8 +4,17 @@ from colorama import Fore
 from english_words import *
 from nltk.corpus import words
 
-secret_word_list = words.words()
+word_list = words.words()
 
+def filterWordLenFunc(x):
+    if len(x) != 6:
+        return False
+    else:
+        return True
+
+secret_word_list = list(filter(filterWordLenFunc, word_list))
+
+#TODO: Implement GUI for wordle game
 
 def guessgame():
     secret_word = random.choice(secret_word_list)
